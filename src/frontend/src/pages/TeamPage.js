@@ -2,7 +2,7 @@ import { React } from 'react';
 import { MatchDetailCard } from '../components/MatchDetailCard';
 import { MatchSmallCard } from '../components/MatchSmallCard';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 export const TeamPage = () => {
 	const [ team, setTeam ] = useState({ matches: [] });
 	let { teamName } = useParams();
@@ -15,7 +15,7 @@ export const TeamPage = () => {
 			};
 			fetchMatches();
 		},
-		[ teamName]
+		[ teamName ]
 	);
 
 	if (!team || !team.teamName) {
@@ -26,6 +26,7 @@ export const TeamPage = () => {
 			<h1> {team.teamName} </h1>
 			<MatchDetailCard teamName={team.teamName} match={team.matches[0]} />
 			{team.matches.slice(1).map((match) => <MatchSmallCard teamName={team.teamName} match={match} />)}
+
 		</div>
 	);
 };
